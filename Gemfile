@@ -51,6 +51,10 @@ end
 
 gem 'devise'
 
+# For handling notificatond delivery to users
+
+gem 'noticed'
+
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
