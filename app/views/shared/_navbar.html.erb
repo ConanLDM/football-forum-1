@@ -1,0 +1,18 @@
+<nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand">Football Forum 1</a>
+    <ul class="navbar-nav mb-4 mb-lg-0">
+      <% if user_signed_in? %>
+      <div> Welcome <%= current_user.email %> </div>
+        <%= link_to "Edit User Profile", edit_user_registration_path, method: :edit %>
+        <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to "Login", new_user_session_path %>
+      <% end %>
+    </ul>
+    <form class="d-flex" role="search">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+</nav>

@@ -1,11 +1,6 @@
-<h1>Football Forum 1</h1>
-
-<% if user_signed_in? %>
- <div> Welcome <%= current_user.email %> </div>
-  <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
-<% else %>
-  <%= button_to "Sign in", new_user_session_path %>
-<% end %>
+<div>
+  <h2>Football forum... redefined...</h2>
+</div>
 
 
 <%= link_to "Active Discussions", discussions_path %>
