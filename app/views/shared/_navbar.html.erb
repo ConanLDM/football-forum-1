@@ -3,8 +3,7 @@
     <a class="navbar-brand">Football Forum 1</a>
     <ul class="navbar-nav mb-4 mb-lg-0">
       <% if user_signed_in? %>
-      <div> Welcome <%= current_user.email %> </div>
-        <%= link_to "Edit User Profile", edit_user_registration_path, method: :edit %>
+        <%= link_to Current.user.email, edit_user_registration_path, method: :edit %>
         <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
       <% else %>
         <%= link_to "Login", new_user_session_path %>
