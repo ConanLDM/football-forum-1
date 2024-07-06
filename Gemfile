@@ -58,6 +58,8 @@ gem 'noticed'
 gem "bootstrap"
 gem "sassc-rails"
 
+gem 'simple_form'
+
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
