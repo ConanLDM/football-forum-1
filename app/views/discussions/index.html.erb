@@ -1,4 +1,19 @@
 <div class="d-flex align-items-center">
   <h1>Active Discussions</h1>
-  <%= link_to "New Discussion", root_path, class: "btn" %>
+  <%= link_to "New Discussion", new_discussion_path, class: "btn" %>
+</div>
+
+
+<div class="row mt-2">
+  <div class="col">
+    <div id="discussions">
+      <% if @discussions.any? %>
+        <%= render @discussions %>
+      <% else %>
+        <div class="alert alert-info" role="alert">
+          No discussions about football have been started yet. Be the first to share your thoughts!
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
