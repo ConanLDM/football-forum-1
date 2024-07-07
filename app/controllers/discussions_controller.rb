@@ -9,15 +9,22 @@ class DiscussionsController < ApplicationController
     @discussion = Discussion.new(discussion_params)
     @discussion.user = Current.user
 
-    if @discussion.save
-      flash[:notice] = "Discussion created successfully!"
-      redirect_to @discussion
-    else
-      render :new
+    respond_to do |format|
+      if @discussion.save
+        format.html { redirect_to discussions_path, notice: "A Discussion has been created" }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 
   def new
     @discussion = Discussion.new
+  end
+
+  private
+
+  def discussion_params
+    params.require(:discussion).permit(:title)
   end
 end
