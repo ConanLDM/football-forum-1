@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   resources :discussions do
     resources :posts
   end
+
+  mount MissionControl::Jobs::Engine, at: "/jobs"
 end

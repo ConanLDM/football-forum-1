@@ -51,7 +51,7 @@ end
 
 gem 'devise'
 
-# For handling notificatond delivery to users
+# For handling notifications deliveries to users
 gem 'noticed'
 
 
@@ -59,6 +59,12 @@ gem "bootstrap"
 gem "sassc-rails"
 
 gem 'simple_form'
+
+# Backend integration with Active Job
+gem "solid_queue"
+
+# Solid Queue Frontend UI
+gem "mission_control-jobs"
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
