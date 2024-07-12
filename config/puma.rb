@@ -33,3 +33,6 @@ pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
+
+# For integrating Solid Queue with Puma
+plugin :solid_queue
