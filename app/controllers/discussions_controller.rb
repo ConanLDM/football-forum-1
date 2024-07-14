@@ -30,6 +30,7 @@ class DiscussionsController < ApplicationController
   def update
     respond_to do |format|
       if @discussion.update(discussion_params)
+        @discussion.broadcast_replace(partial: "discussions/discussion_header", local: { discussion: @discussion })
         format.html { redirect_to @discussion, notice: "This discussion has been updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
