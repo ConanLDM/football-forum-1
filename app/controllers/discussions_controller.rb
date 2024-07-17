@@ -21,6 +21,7 @@ class DiscussionsController < ApplicationController
 
   def new
     @discussion = Discussion.new
+    @discussion.posts.new
   end
 
   def edit
@@ -50,7 +51,7 @@ class DiscussionsController < ApplicationController
   private
 
   def discussion_params
-    params.require(:discussion).permit(:title)
+    params.require(:discussion).permit(:title, posts_attributes: :content)
   end
 
   def set_discussion

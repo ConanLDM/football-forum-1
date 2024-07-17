@@ -1,4 +1,13 @@
 <%= simple_form_for @discussion do |f| %>
   <%= f.input :title, label: 'Please enter a discussion title', error: 'Title is mandatory, please specify one' %>
+
+  <% if @discussion.new_record? %>
+    <%= f.simple_fields_for :posts do |p| %>
+      <div class="mb-3">
+        <%= p.rich_text_area :content, placeholder: "Talk football..." %>
+      </div>
+    <% end %>
+  <% end %>
+
   <%= f.button :submit %>
 <% end %>
