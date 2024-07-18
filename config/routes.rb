@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :discussions do
-    resources :posts
+    resources :posts, only: [:create], module: :discussions
   end
 
   mount MissionControl::Jobs::Engine, at: "/jobs"
