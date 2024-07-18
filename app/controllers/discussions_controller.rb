@@ -41,6 +41,7 @@ class DiscussionsController < ApplicationController
 
   def show
     @discussion = Discussion.find(params[:id])
+    @new_post = @discussion.posts.new
   end
 
   def destroy
