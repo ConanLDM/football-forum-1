@@ -2,8 +2,14 @@
 
 <%= render(partial: "discussions/discussion_header", locals: { discussion: @discussion }) %>
 
-<hr class="my-2">
+<div class="mt-4">
+  <%= render partial: "discussions/posts/post", collection: @posts %>
+</div>
+
+<hr class="my-4">
 
 <div id="<%= dom_id(@new_post) %>">
   <%= render("discussions/posts/form", post: @new_post) %>
 </div>
+
+<%= link_to "Back to Discussions", discussions_path, class: "btn btn-secondary" %>
