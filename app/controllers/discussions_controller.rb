@@ -40,7 +40,7 @@ class DiscussionsController < ApplicationController
   end
 
   def show
-    @discussion = Discussion.find(params[:id])
+    @posts = @discussion.posts.all.order(created_at: :asc)
     @new_post = @discussion.posts.new
   end
 
