@@ -6,9 +6,18 @@ class DiscussionsController < ApplicationController
     @discussions = Discussion.all.order(updated_at: :desc)
   end
 
+  def show
+    @posts = @discussion.posts.all.order(created_at: :asc)
+    @new_post = @discussion.posts.new
+  end
+
+  def new
+    @discussion = Discussion.new
+    @discussion.posts.new
+  end
+
   def create
     @discussion = Discussion.new(discussion_params)
-    @discussion.user = Current.user
 
     respond_to do |format|
       if @discussion.save
@@ -19,11 +28,6 @@ class DiscussionsController < ApplicationController
     end
   end
 
-  def new
-    @discussion = Discussion.new
-    @discussion.posts.new
-  end
-
   def edit
 
   end
@@ -31,17 +35,12 @@ class DiscussionsController < ApplicationController
   def update
     respond_to do |format|
       if @discussion.update(discussion_params)
-        @discussion.broadcast_replace(partial: "discussions/discussion_header", local: { discussion: @discussion })
+        @discussion.broadcast_replace(partial: "discussions/discussion_header", locals: { discussion: @discussion })
         format.html { redirect_to @discussion, notice: "This discussion has been updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
     end
-  end
-
-  def show
-    @posts = @discussion.posts.all.order(created_at: :asc)
-    @new_post = @discussion.posts.new
   end
 
   def destroy

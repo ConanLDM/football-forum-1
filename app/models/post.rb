@@ -7,6 +7,9 @@ class Post < ApplicationRecord
 
   validates :content, presence: true
 
+  after_create_commit -> { broadcast_append_to discussion, partial: "discussions/posts/post", locals: { post: self }}
+  
+
   def likes_count
     likes.count
   end
