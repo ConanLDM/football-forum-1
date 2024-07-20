@@ -1,6 +1,6 @@
 <%= turbo_stream_from 'discussions' %>
 
-<div class="d-flex justify-content-between">
+<div class="d-flex justify-content-between  align-items-center">
   <h1>Active Discussions</h1>
   <%= link_to "Create a Discussion", new_discussion_path, class: "btn btn-secondary" %>
 </div>
@@ -9,13 +9,7 @@
 <div class="row mt-2">
   <div class="col">
     <div id="discussions">
-      <% if @discussions.any? %>
-        <%= render @discussions %>
-      <% else %>
-        <div class="alert alert-info" role="alert">
-          No discussions about football have been started yet. Be the first to share your thoughts!
-        </div>
-      <% end %>
+      <%= render @discussions %>
     </div>
   </div>
 </div>

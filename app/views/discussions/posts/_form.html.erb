@@ -1,8 +1,8 @@
-<%= turbo_frame_tag "#{dom_id(post)}_form", target: "_top" do %>
+<%= turbo_frame_tag "#{dom_id(post)}_form", target: "_top"  do %>
   <%= simple_form_for([post.discussion, post]) do |f| %>
     <%= f.error_notification %>
 
-    <%= f.input :content, as: :rich_text_area, input_html: { placeholder: "Add your comment", autofocus: true }, label: false %>
+    <%= f.input :content, as: :rich_text_area, input_html: { placeholder: "Add your post", autofocus: true }, label: false %>
 
     <%= f.button :submit, class: "btn btn-primary" %>
   <% end %>
