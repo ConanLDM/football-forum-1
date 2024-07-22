@@ -6,7 +6,13 @@
     </div>
 
     <div class="card-footer">
-      <%= link_to "Edit", edit_discussion_post_path(post.discussion, post), data: { turbo_frame: dom_id(post) } %>
+      <%= link_to "Edit", edit_discussion_post_path(post.discussion, post), data: { turbo_frame: dom_id(post) } %> |
+      <%= link_to "Delete", discussion_post_path(post.discussion, post),
+              data: {
+                turbo_method: :delete,
+                turbo_frame: dom_id(post),
+                turbo_confirm: "Are you sure you want to delete this post?"
+              } %>    </div>
+      </div>#
     </div>
-  </div>
-<% end%>
+<% end %>
