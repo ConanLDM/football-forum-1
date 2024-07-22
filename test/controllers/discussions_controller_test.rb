@@ -1,7 +1,8 @@
-require "test_helper"
+require 'test_helper'
 
 class DiscussionsControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'should redirect to login page when not logged in' do
+    get discussions_path
+    assert_redirected_to new_user_session_path
+  end
 end
