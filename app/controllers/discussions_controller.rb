@@ -7,6 +7,7 @@ class DiscussionsController < ApplicationController
   end
 
   def show
+    set_discussion
     @posts = @discussion.posts.all.order(created_at: :asc)
     @new_post = @discussion.posts.new
   end
@@ -51,7 +52,7 @@ class DiscussionsController < ApplicationController
   private
 
   def discussion_params
-    params.require(:discussion).permit(:title, posts_attributes: :content)
+    params.require(:discussion).permit(:title, :category_id, posts_attributes: :content)
   end
 
   def set_discussion
