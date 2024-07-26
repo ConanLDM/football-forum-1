@@ -7,9 +7,14 @@
     { include_blank: "Pick a category..."}, { autofocus: false, class: "form-control" } %>
   </div>
 
+  <div class="mb-2">
+    <%= f.label :closed, class: "form-label" %>
+    <%= f.check_box :closed %>
+  </div>
+
   <% if @discussion.new_record? %>
     <%= f.simple_fields_for :posts do |p| %>
-      <div class="mb-3">
+      <div class="mb-2">
         <%= p.rich_text_area :content, placeholder: "Talk football..." %>
       </div>
     <% end %>
