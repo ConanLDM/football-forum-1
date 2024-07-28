@@ -5,14 +5,24 @@
       <%= post.content %>
     </div>
 
-    <div class="card-footer">
-      <%= link_to "Edit", edit_discussion_post_path(post.discussion, post), data: { turbo_frame: dom_id(post) } %> |
-      <%= link_to "Delete", discussion_post_path(post.discussion, post),
-              data: {
-                turbo_method: :delete,
-                turbo_frame: dom_id(post),
-                turbo_confirm: "Are you sure you want to delete this post?"
-              } %>    </div>
-      </div>#
+    <% if action_name.nil? %>
+       <%= turbo_frame_tag "post_actions", src: discussion_post_path(post.discussion, post) do %>
+         <div class="card-footer">
+       <% end %>
+    <% else %>
+      <%= turbo_frame_tag "post_actions" do %>
+        <% if Current.user == post.user || Current.user.admin? %>
+          <div class="card-footer mt-2">
+            <%= link_to "Edit", edit_discussion_post_path(post.discussion, post), data: { turbo_frame: dom_id(post) } %> |
+            <%= link_to "Delete", discussion_post_path(post.discussion, post),
+                    data: {
+                      turbo_method: :delete,
+                      turbo_frame: dom_id(post),
+                      turbo_confirm: "Are you sure you want to delete this post?"
+                    } %>    </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>#
     </div>
 <% end %>
