@@ -4,7 +4,7 @@ module Categories
     before_action :set_category
 
     def index
-      @discussions = @category.discussions.order(updated_at: :desc)
+      @pagy, @discussions = pagy(@category.discussions.order(updated_at: :desc))
       render 'discussions/index'
     end
 

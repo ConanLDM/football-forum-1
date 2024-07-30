@@ -3,7 +3,7 @@ class DiscussionsController < ApplicationController
   before_action :set_discussion, only: [:show, :edit, :destroy, :update]
 
   def index
-    @discussions = Discussion.all.order(updated_at: :desc)
+    @pagy, @discussions = pagy(Discussion.includes(:category))
   end
 
   def show
