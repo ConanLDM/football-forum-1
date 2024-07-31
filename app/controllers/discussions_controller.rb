@@ -3,12 +3,13 @@ class DiscussionsController < ApplicationController
   before_action :set_discussion, only: [:show, :edit, :destroy, :update]
 
   def index
-    @pagy, @discussions = pagy(Discussion.includes(:category))
+    @pagy, @discussions = pagy(Discussion.includes(:category), items: 5)
   end
 
   def show
-    set_discussion
-    @posts = @discussion.posts.includes(:user, :rich_text_content).order(created_at: :asc)
+    @discussion = Discussion.find(params[:id])
+
+    @pagy, @posts = pagy(@discussion.posts.includes(:user, :rich_text_content).order(created_at: :asc), items: 5)
     @new_post = @discussion.posts.new
   end
 
