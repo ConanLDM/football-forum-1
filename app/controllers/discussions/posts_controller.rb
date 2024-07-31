@@ -1,5 +1,6 @@
 module Discussions
   class PostsController < ApplicationController
+    include Pagy::Backend
     before_action :authenticate_user!
     before_action :set_discussion
     before_action :set_post, only: [:show, :edit, :update, :destroy]
@@ -23,12 +24,15 @@ module Discussions
         end
       end
     end
+
     def create
       @post = @discussion.posts.new(post_params)
 
       respond_to do |format|
         if @post.save
-          format.html { redirect_to discussion_path(@discussion), notice: "Post created" }
+          @pagy, @posts = pagy(@discussion.posts.order(created_at: :desc), items: 5)
+          format.html { redirect_to discussion_path(@discussion, page: @pagy.last), notice: "Post created" }
+          format.turbo_stream
         else
           format.turbo_stream
           format.html { render :new, status: :unprocessable_entity }

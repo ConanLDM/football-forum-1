@@ -9,6 +9,10 @@
 
       <%= f.input :content, as: :rich_text_area, input_html: { placeholder: "Add your post", autofocus: true }, label: false %>
 
+      <% if local_assigns[:redirect] %>
+        <%= f.hidden_field :redirect, value: true %>
+      <% end %>
+
       <%= f.button :submit, class: "btn btn-primary" %>
     <% end %>
   <% end %>
