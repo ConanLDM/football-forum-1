@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_28_133047) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_02_173332) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -57,6 +57,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_28_133047) do
     t.integer "discussions_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "discussion_subscriptions", force: :cascade do |t|
+    t.bigint "discussion_id", null: false
+    t.bigint "user_id", null: false
+    t.string "subscription_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["discussion_id"], name: "index_discussion_subscriptions_on_discussion_id"
+    t.index ["user_id"], name: "index_discussion_subscriptions_on_user_id"
   end
 
   create_table "discussions", force: :cascade do |t|
@@ -231,6 +241,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_28_133047) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "discussion_subscriptions", "discussions"
+  add_foreign_key "discussion_subscriptions", "users"
   add_foreign_key "discussions", "users"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
