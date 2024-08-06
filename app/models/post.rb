@@ -5,6 +5,9 @@ class Post < ApplicationRecord
 
   has_rich_text :content
 
+  has_noticed_notifications
+
+
   validates :content, presence: true
 
   after_create_commit -> { broadcast_append_to discussion, partial: "discussions/posts/post", locals: { post: self }}
