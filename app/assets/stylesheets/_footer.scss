@@ -1,5 +1,9 @@
+body {
+  padding-bottom: 100px;
+}
+
 footer {
-  position: fixed;
+  position: sticky;
   bottom: 0;
   width: 100%;
 }

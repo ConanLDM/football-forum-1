@@ -52,8 +52,7 @@ end
 gem 'devise'
 
 # For handling notifications deliveries to users
-gem 'noticed'
-
+gem 'noticed', "~> 1.6"
 
 gem "bootstrap"
 gem "sassc-rails"

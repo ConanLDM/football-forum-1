@@ -20,5 +20,11 @@ Rails.application.routes.draw do
     resources :notifications, only: :create, module: :discussions
   end
 
+  resources :notifications, only: :index do
+    collection do
+      post '/mark_as_read', to: "notifications#read_all", as: :read
+    end
+  end
+
   mount MissionControl::Jobs::Engine, at: "/jobs"
 end
