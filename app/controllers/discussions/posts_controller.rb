@@ -30,6 +30,8 @@ module Discussions
 
       respond_to do |format|
         if @post.save
+          send_post_notification!(@post)
+
           @pagy, @posts = pagy(@discussion.posts.order(created_at: :desc), items: 5)
           format.html { redirect_to discussion_path(@discussion, page: @pagy.last), notice: "Post created" }
           format.turbo_stream
@@ -50,6 +52,11 @@ module Discussions
     end
 
     private
+
+    def send_post_notification!(post)
+      post_subscribers = post.discussion.subscribed_users - [post.user]
+      NewPostNotification.with(post: post).deliver_later(post_subscribers)
+    end
 
     def set_discussion
       @discussion = Discussion.find(params[:discussion_id])
