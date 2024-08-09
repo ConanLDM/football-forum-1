@@ -8,7 +8,14 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  root to: "pages#home"
+
+  unauthenticated do
+    root to: "pages#home", as: :unauthenticated_root
+  end
+
+  authenticated do
+    root to: "discussions#index"
+  end
 
   resources :discussions do
     resources :posts, only: [:create, :show, :edit, :update, :destroy], module: :discussions
